@@ -9,7 +9,8 @@ def main():
     url = input('Введите ссылку: ')
     if is_bitlink(url, token):
         try:
-            print(count_clicks(token, url))
+            clicks_count = count_clicks(token, url)
+            print(f'Количество кликов {clicks_count}')
         except requests.exceptions.HTTPError as err:
             print(f'Введена неверная ссылка, подробности: {err}')
     else:
@@ -33,7 +34,7 @@ def count_clicks(token, url):
     headers = {'Authorization': f'Bearer {token}'}
     response = requests.get(counter_url, headers=headers)
     response.raise_for_status()
-    return f'Количество кликов {response.json()["total_clicks"]}'
+    return response.json()["total_clicks"]
 
 
 def is_bitlink(url, token):
