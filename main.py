@@ -1,9 +1,11 @@
 import requests
 import os
+from dotenv import load_dotenv
 
 
 def main():
-    token = os.environ['BITLY_TOKEN']
+    load_dotenv()
+    token = os.environ.get('BITLY_TOKEN')
     url = input('Введите ссылку: ')
     if is_bitlink(url, token):
         try:
