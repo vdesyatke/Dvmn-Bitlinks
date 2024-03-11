@@ -1,23 +1,36 @@
 import requests
 import os
 from dotenv import load_dotenv
+import argparse
 
 
 def main():
     load_dotenv()
     token = os.environ.get('BITLY_TOKEN')
-    url = input('Введите ссылку: ')
+
+    parser = create_parser()
+    url = parser.parse_args().url
+
     if is_bitlink(url, token):
         try:
             clicks_count = count_clicks(token, url)
-            print(f'Количество кликов {clicks_count}')
+            print(f'Count of clicks is {clicks_count}')
         except requests.exceptions.HTTPError as err:
-            print(f'Введена неверная ссылка, подробности: {err}')
+            print(f'You have entered incorrect url, details: {err}')
     else:
         try:
             print(shorten_link(token, url))
         except requests.exceptions.HTTPError as err:
-            print(f'Введена неверная ссылка, подробности: {err}')
+            print(f'You have entered incorrect url, details: {err}')
+
+
+def create_parser():
+    description = '''This program accepts one required positional argument, url.\n
+    If this url is a bitlink, the program returns a count of clicks on this bitlink.\n
+    If the url is not a bitlink, the program returns a bitlink for the submitted url.'''
+    parser = argparse.ArgumentParser(description=description)
+    parser.add_argument('url', help='Please submit a url')
+    return parser
 
 
 def shorten_link(token, url):
