@@ -7,7 +7,6 @@ import argparse
 def main():
     load_dotenv()
     token = os.environ.get('BITLY_TOKEN')
-
     parser = create_parser()
     url = parser.parse_args().url
 
