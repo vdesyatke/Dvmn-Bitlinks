@@ -9,6 +9,8 @@ If the url is not a bitlink, the program returns a bitlink for the submitted url
 1. Clone the project to your PC, details [here](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository).
 2. Install, run and activate your virtual environment, details [here](https://docs.python-guide.org/dev/virtualenvs/).
 3. To install the dependencies, simply run ```pip install -r requirements.txt```.
+4. Generate your bit.ly token [here](https://app.bitly.com/settings/api/)
+5. In the root directory of the project create a new file named `.env` with an environment variable `BITLY_TOKEN={your_token_here}`.
 
 ## Examples of use
 ```python
