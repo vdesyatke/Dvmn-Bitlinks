@@ -1,12 +1,12 @@
 import requests
-import os
-from dotenv import load_dotenv
+from environs import Env
 import argparse
 
 
 def main():
-    load_dotenv()
-    token = os.environ.get('BITLY_TOKEN')
+    env = Env()
+    env.read_env()
+    token = env('BITLY_TOKEN')
     parser = create_parser()
     url = parser.parse_args().url
 
